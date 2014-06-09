@@ -1,12 +1,10 @@
-var connectionDetails = {
-        host: 'localhost',
-        user: 'test',
-        password: 'pwd',
-        database: 'test'
-    },
-    backupTables = [
-        'modules'
-    ],
-    dumper = require('./dumper');
+var dumper = require('./dumper'),
+    filler = require('./filler');
 
-dumper(connectionDetails, backupTables);
+exports.dump = function(credentials, tables, filename) {
+    dumper(credentials, tables, filename);
+};
+
+exports.fill = function(credentials, filename) {
+    filler(credentials, filename);
+};

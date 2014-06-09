@@ -1,11 +1,10 @@
-module.exports = function(connectionDetails, backupTables) {
+module.exports = function(connectionDetails, backupTables, filename) {
     'use strict';
     var q = require('q'),
         mysql = require('mysql'),
         fs = require('fs'),
         connection,
-        dump = '',
-        filename = 'dump.sql';
+        dump = '';
 
     connection = mysql.createConnection(connectionDetails);
 
@@ -29,8 +28,8 @@ module.exports = function(connectionDetails, backupTables) {
 
     function getRow(tableName) {
         return function(rowDetails) {
-            dump += "DROP TABLE " + tableName + " \n\n";
-            dump += rowDetails[0][0]['Create Table'] + "\n\n";
+            dump += "DROP TABLE IF EXISTS " + tableName + " ;\n\n";
+            dump += rowDetails[0][0]['Create Table'] + " ;\n\n";
         };
     }
 
