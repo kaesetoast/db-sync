@@ -23,3 +23,6 @@ node_modules
 
 # SublimeText Project files
 *.sublime*
+
+# dump
+*.sql

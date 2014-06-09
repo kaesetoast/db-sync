@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/kaesetoast/db-sync/issues"
   },
-  "homepage": "https://github.com/kaesetoast/db-sync"
+  "homepage": "https://github.com/kaesetoast/db-sync",
+  "dependencies": {
+    "mysql": "^2.3.2",
+    "q": "^1.0.1"
+  }
 }
