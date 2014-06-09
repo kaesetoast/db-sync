@@ -1,0 +1,19 @@
+{
+  "name": "db-sync",
+  "version": "0.1.0",
+  "description": "A simple tool to keep certain database tables synced between different environments",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kaesetoast/db-sync.git"
+  },
+  "author": "Philipp Nowinski <philipp@nowinski.de>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kaesetoast/db-sync/issues"
+  },
+  "homepage": "https://github.com/kaesetoast/db-sync"
+}
