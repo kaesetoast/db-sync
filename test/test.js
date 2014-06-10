@@ -42,7 +42,7 @@ afterEach(function(done) {
 });
 
 describe('test database dumping', function (done) {
-    
+
     it('should create a file containing the dump', function (done) {
         sync.dump(dumpCredentials, [], 'testdump.sql').then(function(){
             fs.exists('testdump.sql', function(result) {
