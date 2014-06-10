@@ -8,6 +8,16 @@ var chai = require('chai'),
         database: 'test'
     },
     fs = require('fs');
+
+if (process.env.TRAVIS) {
+    dumpCredentials = {
+        host: '127.0.0.1',
+        user: 'travis',
+        password: '',
+        database: 'test'
+    };
+}
+
 chai.should();
 
 beforeEach(function(done) {
