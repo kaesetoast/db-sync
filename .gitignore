@@ -25,4 +25,4 @@ node_modules
 *.sublime*
 
 # dump
-*.sql
+/*.sql

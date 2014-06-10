@@ -1,10 +1,11 @@
-module.exports = function(connectionDetails, backupTables, filename) {
+module.exports = function(connectionDetails, tableBlacklist, filename) {
     'use strict';
     var q = require('q'),
         mysql = require('mysql'),
         fs = require('fs'),
         connection,
-        dump = '';
+        dump = '',
+        deferred = q.defer();
 
     connection = mysql.createConnection(connectionDetails);
 
@@ -17,7 +18,7 @@ module.exports = function(connectionDetails, backupTables, filename) {
             tableDefinitionGetters = [];
         for (var i = 0; i < tables.length; i++) {
             var tableName = tables[i]['Tables_in_' + connectionDetails.database];
-            if (backupTables.indexOf(tableName) === -1) {
+            if (tableBlacklist.indexOf(tableName) !== -1) {
                 continue;
             }
             tableDefinitionGetters.push(q.ninvoke(connection, 'query', 'SHOW CREATE TABLE ' + tableName)
@@ -41,7 +42,11 @@ module.exports = function(connectionDetails, backupTables, filename) {
     .then(getTables)
     .then(getRows)
     .then(saveDump)
-    .then(function(){ console.log(filename + ' successfully written to filesystem'); })
+    .then(function(){
+        console.log(filename + ' successfully written to filesystem');
+        deferred.resolve();
+    })
     .catch(function(err){ console.log(err); })
     .finally(function(){ connection.destroy(); });
+    return deferred.promise;
 };
