@@ -14,7 +14,7 @@ if (process.env.TRAVIS) {
         host: '127.0.0.1',
         user: 'travis',
         password: '',
-        database: 'test'
+        database: 'test_db_sync'
     };
 }
 
