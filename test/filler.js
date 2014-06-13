@@ -1,7 +1,8 @@
+'use strict';
+
 var chai = require('chai'),
     sync = require('../index'),
     mysql = require('mysql'),
-    fs = require('fs'),
     config = require('./config'),
     credentials = config.fillerDatabaseCredentials;
 
@@ -15,13 +16,17 @@ beforeEach(function(done) {
     connection = mysql.createConnection(credentials);
     connection.query('use ' + credentials.database);
     connection.query('SHOW TABLES', function(err, result) {
-        if (err) throw err;
+        if (err) {
+            throw err;
+        }
         for (var i = result.length; i--;) {
             dropQuery += 'DROP TABLE IF EXISTS ' + result[i]['Tables_in_' + credentials.database] + '; ';
         }
         if (dropQuery !== '') {
-            connection.query(dropQuery, function(err, result) {
-                if (err) throw err;
+            connection.query(dropQuery, function(err) {
+                if (err) {
+                    throw err;
+                }
                 connection.destroy();
                 done();
             });
@@ -39,8 +44,10 @@ describe('test database filling', function () {
         sync.fill(credentials, './test/testdatabase.sql').then(function() {
             var connection = mysql.createConnection(credentials);
             connection.query('use ' + credentials.database);
-            connection.query('SELECT * FROM table_one', function(err, result) {
-                if (err) throw err;
+            connection.query('SELECT * FROM table_one', function(err) {
+                if (err) {
+                    throw err;
+                }
                 connection.destroy();
                 done();
             });
