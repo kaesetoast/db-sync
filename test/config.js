@@ -1,3 +1,5 @@
+'use strict';
+
 exports.dumperDatabaseCredentials = function() {
     if (process.env.TRAVIS) {
         return {
