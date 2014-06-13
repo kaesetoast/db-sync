@@ -1,3 +1,5 @@
+'use strict';
+
 var dumper = require('./dumper'),
     filler = require('./filler');
 
