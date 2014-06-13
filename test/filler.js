@@ -41,7 +41,6 @@ describe('test database filling', function () {
             connection.query('use ' + credentials.database);
             connection.query('SELECT * FROM table_one', function(err, result) {
                 if (err) throw err;
-                console.info(result);
                 connection.destroy();
                 done();
             });
