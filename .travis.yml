@@ -2,4 +2,4 @@ language: node_js
 node_js:
 - 0.1
 before_script:
-  - mysql -e 'create database test_db_sync;'
+  - mysql -e 'create database test_db_sync; create database test_db_sync_a'
