@@ -29,8 +29,8 @@ module.exports = function(connectionDetails, tableBlacklist, filename) {
 
     function getRow(tableName) {
         return function(rowDetails) {
-            dump += "DROP TABLE IF EXISTS " + tableName + " ;\n\n";
-            dump += rowDetails[0][0]['Create Table'] + " ;\n\n";
+            dump += 'DROP TABLE IF EXISTS ' + tableName + ' ;\n\n';
+            dump += rowDetails[0][0]['Create Table'] + ' ;\n\n';
         };
     }
 
