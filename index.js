@@ -6,5 +6,5 @@ exports.dump = function(credentials, tableBlacklist, filename) {
 };
 
 exports.fill = function(credentials, filename) {
-    filler(credentials, filename);
+    return filler(credentials, filename);
 };
