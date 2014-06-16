@@ -46,7 +46,9 @@ module.exports = function(connectionDetails, tableBlacklist, filename) {
         console.log(filename + ' successfully written to filesystem');
         deferred.resolve();
     })
-    .catch(function(err){ console.log(err); })
+    .catch(function(err){
+        deferred.reject(err);
+    })
     .finally(function(){ connection.destroy(); });
     return deferred.promise;
 };

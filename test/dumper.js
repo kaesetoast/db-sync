@@ -86,4 +86,19 @@ describe('test database dumping', function () {
         });
     });
 
+    it('should abort dumping an reject promise when wrong credentials are provided', function (done) {
+        sync.dump({
+            host: 'localhost',
+            user: 'thisiswrong',
+            password: 'thisiswrong',
+            database: 'doesnotexist'
+        }, [], './notwritten.sql').fail(function(err) {
+            err.code.should.equal('ER_ACCESS_DENIED_ERROR');
+            fs.exists('./notwritten.sql', function(result) {
+                result.should.equal(false);
+                done();
+            });
+        });
+    });
+
 });
