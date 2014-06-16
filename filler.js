@@ -20,7 +20,9 @@ module.exports = function(credentials, filename) {
         console.log('database successfully filled with ' + filename);
         deferred.resolve();
     })
-    .catch(function(err) { console.log(err); })
+    .catch(function(err) {
+        deferred.reject(err);
+    })
     .finally(function(){ connection.destroy(); });
     return deferred.promise;
 };

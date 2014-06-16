@@ -34,12 +34,12 @@ beforeEach(function(done) {
             connection.destroy();
             done();
         }
-        
+
     });
 });
 
 describe('test database filling', function () {
-    
+
     it('should create the right tables', function (done) {
         sync.fill(credentials, './test/testdatabase.sql').then(function() {
             var connection = mysql.createConnection(credentials);
@@ -51,6 +51,26 @@ describe('test database filling', function () {
                 connection.destroy();
                 done();
             });
+        });
+    });
+
+    it('should reject promise when wrong credentials are provided', function (done) {
+        sync.fill({
+            host: 'localhost',
+            user: 'thisiswrong',
+            password: 'thisiswrong',
+            database: 'doesnotexist'
+        }, '../test/testdatabase.sql').fail(function(err) {
+            err.code.should.equal('ER_ACCESS_DENIED_ERROR');
+            done();
+        });
+    });
+
+    it('should reject promise when dump is not existent', function (done) {
+        sync.fill(credentials, './doesnotexist.sql').fail(function(err) {
+            err.code.should.equal('ENOENT');
+            err.message.should.equal('ENOENT, no such file or directory \'./doesnotexist.sql\'');
+            done();
         });
     });
 
