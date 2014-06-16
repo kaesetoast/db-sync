@@ -3,6 +3,8 @@ db-sync [![Build Status](https://travis-ci.org/kaesetoast/db-sync.svg?branch=mas
 
 db-sync is a nodejs based tool for syncing databases between different environments. It basically consists of a dump() and a fill() method for dumping databases in one environment and deploying them into another.
 
+Note: right now, db-sync only supports MySQL databases
+
 ## Example usecase
 Let's assume you are building a website powered by a CMS like [Processwire](http://processwire.com/). You may want to replicate the changes you make in the backend of your dev-environment inside your staging environment when deploying your code.
 
