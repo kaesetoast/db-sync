@@ -26,6 +26,8 @@ SET time_zone = "+00:00";
 -- Tabellenstruktur für Tabelle `table_one`
 --
 
+DROP TABLE IF EXISTS `table_one`;
+
 CREATE TABLE IF NOT EXISTS `table_one` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `stringval` varchar(250) NOT NULL,
@@ -37,6 +39,8 @@ CREATE TABLE IF NOT EXISTS `table_one` (
 --
 -- Tabellenstruktur für Tabelle `table_two`
 --
+
+DROP TABLE IF EXISTS `table_two`;
 
 CREATE TABLE IF NOT EXISTS `table_two` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
