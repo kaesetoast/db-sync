@@ -48,10 +48,11 @@ sync.fill(dbConfig, './dump.sql');
 **filename:** the path to the .sql file
 
 ## Release History
+* 2014-06-17   v0.2.0   implemented content dumping
 * 2014-06-16   v0.1.0   first working version
 
 ## Planned features
-* support content dumping
+* make dumping and filling of content optional
 
 ## Contributing
 Please feel free to fork, add specs, and send pull requests! In lieu of a formal styleguide, take care to

@@ -1,6 +1,6 @@
 {
   "name": "db-sync",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A simple tool to keep certain database tables synced between different environments",
   "main": "index.js",
   "scripts": {
