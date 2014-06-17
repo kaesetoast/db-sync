@@ -13,7 +13,7 @@ module.exports = function(connectionDetails, tableBlacklist, filename) {
         return q.ninvoke(connection, 'query', 'SHOW TABLES');
     }
 
-    function getRows(tableData) {
+    function getCols(tableData) {
         var tables = tableData[0],
             tableDefinitionGetters = [];
         for (var i = 0; i < tables.length; i++) {
@@ -22,12 +22,12 @@ module.exports = function(connectionDetails, tableBlacklist, filename) {
                 continue;
             }
             tableDefinitionGetters.push(q.ninvoke(connection, 'query', 'SHOW CREATE TABLE ' + tableName)
-            .then(getRow(tableName)));
+            .then(getCol(tableName)));
         }
         return q.allSettled(tableDefinitionGetters);
     }
 
-    function getRow(tableName) {
+    function getCol(tableName) {
         return function(rowDetails) {
             dump += 'DROP TABLE IF EXISTS ' + tableName + ' ;\n\n';
             dump += rowDetails[0][0]['Create Table'] + ' ;\n\n';
@@ -40,7 +40,7 @@ module.exports = function(connectionDetails, tableBlacklist, filename) {
 
     q.ninvoke(connection, 'connect')
     .then(getTables)
-    .then(getRows)
+    .then(getCols)
     .then(saveDump)
     .then(function(){
         console.log(filename + ' successfully written to filesystem');
