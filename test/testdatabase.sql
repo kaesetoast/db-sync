@@ -32,7 +32,15 @@ CREATE TABLE IF NOT EXISTS `table_one` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `stringval` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Daten für Tabelle `table_one`
+--
+
+INSERT INTO `table_one` (`id`, `stringval`) VALUES
+(1, 'bla'),
+(2, 'fghdgf');
 
 -- --------------------------------------------------------
 
@@ -46,7 +54,15 @@ CREATE TABLE IF NOT EXISTS `table_two` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `intval` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Daten für Tabelle `table_two`
+--
+
+INSERT INTO `table_two` (`id`, `intval`) VALUES
+(1, 7),
+(2, 686786);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

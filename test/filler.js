@@ -54,6 +54,42 @@ describe('test database filling', function () {
         });
     });
 
+    it('should fill tables with correct data into table_one', function (done) {
+        sync.fill(credentials, './test/testdatabase.sql').then(function() {
+            var connection = mysql.createConnection(credentials);
+            connection.query('use ' + credentials.database);
+            connection.query('SELECT * FROM table_one', function(err, result) {
+                if (err) {
+                    throw err;
+                }
+                result[0].id.should.equal(1);
+                result[0].stringval.should.equal('bla');
+                result[1].id.should.equal(2);
+                result[1].stringval.should.equal('fghdgf');
+                connection.destroy();
+                done();
+            });
+        });
+    });
+
+    it('should fill tables with correct data into table_two', function (done) {
+        sync.fill(credentials, './test/testdatabase.sql').then(function() {
+            var connection = mysql.createConnection(credentials);
+            connection.query('use ' + credentials.database);
+            connection.query('SELECT * FROM table_two', function(err, result) {
+                if (err) {
+                    throw err;
+                }
+                result[0].id.should.equal(1);
+                result[0].intval.should.equal(7);
+                result[1].id.should.equal(2);
+                result[1].intval.should.equal(686786);
+                connection.destroy();
+                done();
+            });
+        });
+    });
+
     it('should reject promise when wrong credentials are provided', function (done) {
         sync.fill({
             host: 'localhost',

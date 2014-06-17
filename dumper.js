@@ -31,6 +31,33 @@ module.exports = function(connectionDetails, tableBlacklist, filename) {
         return function(rowDetails) {
             dump += 'DROP TABLE IF EXISTS ' + tableName + ' ;\n\n';
             dump += rowDetails[0][0]['Create Table'] + ' ;\n\n';
+            return q.ninvoke(connection, 'query', 'SELECT * FROM ' + tableName)
+            .then(getInsert(tableName));
+        };
+    }
+
+    function getInsert(tableName) {
+        return function(select) {
+            var result = select[0],
+                keys,
+                values = '(';
+            for (var i = 0; i <result.length; i++) {
+                keys = '';
+                if (values !== '(') {
+                    values += '),\n(';
+                }
+                for (var property in result[i]) {
+                    if (result[i].hasOwnProperty(property)) {
+                        if (keys !== '') {
+                            keys += ', ';
+                            values += ', ';
+                        }
+                        keys += '`' + property + '`';
+                        values += '\'' + result[i][property] + '\'';
+                    }
+                }
+            }
+            dump += 'INSERT INTO `' + tableName + '` (' + keys + ') VALUES\n' + values + ');\n\n';
         };
     }
 
